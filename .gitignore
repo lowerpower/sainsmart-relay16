@@ -1,0 +1,6 @@
+firmware/build/
+sim/sim
+__pycache__/
+*.pyc
+vendor/*
+!vendor/README.md
