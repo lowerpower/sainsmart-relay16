@@ -1,0 +1,30 @@
+#!/usr/bin/python3 -I
+"""udev PROGRAM helper: print the relay16 board ID on a serial port.
+
+Exits 1 (no symlink) for unassigned boards (ID 0), stock-firmware boards
+and anything else on a CH340 that is not running relay16.
+"""
+import sys
+import time
+
+import serial
+
+
+def main():
+    try:
+        with serial.Serial(sys.argv[1], 115200, timeout=0.3) as s:
+            s.write(b"\n")
+            time.sleep(0.05)
+            s.reset_input_buffer()
+            s.write(b"i\n")
+            reply = s.readline().strip()
+    except Exception:
+        return 1
+    if not reply.isdigit() or int(reply) == 0:
+        return 1
+    print(int(reply))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,12 @@
+# relay16: stable device names from the board ID stored in EEPROM.
+#   board with ID 3 -> /dev/relay16-3, on every boot and any USB port
+# Install: make -C linux install
+#
+# Note: these rules match every CH340 (1a86:7523). Other CH340 devices get
+# one "i" line probed at plug-in and are left alone by ModemManager.
+
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", \
+    ENV{ID_MM_DEVICE_IGNORE}="1", GROUP="dialout", MODE="0660"
+
+SUBSYSTEM=="tty", ACTION!="remove", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", \
+    PROGRAM="/usr/local/bin/relay16-udev-id $devnode", SYMLINK+="relay16-%c"
