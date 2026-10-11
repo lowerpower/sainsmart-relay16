@@ -74,6 +74,13 @@ class LiteTest(unittest.TestCase):
         self.assertEqual(self.r.command("h\t1"), "0001")
         self.assertEqual(self.r.command("h 0"), "0000")
 
+    def test_leading_space_after_numbered_command(self):
+        self.assertEqual(self.r.command("s 12"), "0800")
+        self.assertEqual(self.r.command(" r"), "0800")
+        self.assertEqual(self.r.command("t 5"), "5")
+        self.assertEqual(self.r.command("\tc 12"), "0000")
+        self.r.failsafe(0)
+
     def test_rejects(self):
         for line in ["s 0", "s 17", "s", "s x", "s 1 2", "c 99", "h", "h 12345",
                      "h 0g", "x", "r 1", "w 1", "v 1", "i 256", "t 70000", "t 1x",

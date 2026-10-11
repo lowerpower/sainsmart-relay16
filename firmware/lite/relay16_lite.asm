@@ -194,9 +194,10 @@ rx:     mov   a, SBUF
         sjmp  rx_eol
 rx_nl:  cjne  a, #0x0A, rx_chr
 rx_eol: mov   a, st
-        jz    loop              ; blank line: ignore
+        jz    rx_new            ; blank line: ignore
         acall execute
-        mov   st, #0
+rx_new: mov   st, #0            ; next line starts clean
+        mov   nd, #0
         sjmp  loop
 
 rx_chr: mov   a, st
