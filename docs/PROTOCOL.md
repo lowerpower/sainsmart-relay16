@@ -46,19 +46,31 @@ Changes are live immediately but kept only in RAM until `w`.
 | `t [MS]` | failsafe: all relays off after MS ms with no valid command | 0 (off) |
 | `i [ID]` | board ID, 1-255; 0 = unassigned | 0 |
 | `w` | save settings to EEPROM; refused (`?`) unless all relays are off | state |
-| `v` | version | `relay16 1 id 3` |
+| `v` | version | `relay16 1 id 3` (`relay16 1L id 3` on lite) |
 
 Interlock details: the max-on timer starts when a relay goes from off to on.
 Repeating `s N` on a relay that is already on does not restart it, and a `p`
 pulse never runs past the remaining max-on time. Changing `m` affects the
 next time the relay turns on.
 
+## Lite firmware
+
+The lite build (8051 assembly, fits the stock 1 KB chip) implements
+`r s c h t i w v` exactly as above and answers `?` to `p`, `d` and `m`:
+no board-timed pulses and no max-on interlock. `v` reports version `1L`.
+
+Differences in framing: lite parses each character as it arrives, so it has
+no 20-character line limit (junk or an out-of-range number still makes the
+line `?`), and it accepts a number written directly after the command
+(`s5`).
+
 ## Power-up
 
 - All relays off. A power-on relay state is deliberately not stored.
 - Settings load from EEPROM. If the stored block fails its checksum (or was
   never written), everything is default and the ID is 0 (unassigned).
-- Flashing new firmware keeps the EEPROM, so IDs and settings survive.
+- Flashing new firmware keeps the EEPROM, so IDs and settings survive,
+  including switching between the lite and full builds (same layout).
 
 ## Finding boards
 
