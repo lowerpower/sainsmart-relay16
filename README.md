@@ -29,7 +29,11 @@ Hardware, flashing and pin map: [docs/HARDWARE.md](docs/HARDWARE.md).
 
 Both share the EEPROM layout, so IDs survive moving a board from lite to full.
 
-**Neither has run on a real board yet.**
+**Lite is verified on a real board** (2026-10-25): all commands, relay walk
+1-16 in order, failsafe timing, EEPROM save surviving a power cycle.
+Round trip 3.0 ms median; setting all 16 relays with a confirmed reply
+4.0 ms median, 5.2 ms p99 (stock firmware: ~40 ms per relay, no status).
+The full build has not run on hardware yet (needs a 404AS/408AS).
 
 ## Layout
 
@@ -61,7 +65,8 @@ sim/sim -v      # type: s 1 / h f0f0 / p 3 500 / r / v
 
 ## Flash a board
 
-USB-TTL adapter on the 4-pin ISP header (docs/HARDWARE.md), then:
+USB-TTL adapter on the 4-pin ISP header, with the 1 kohm pull-up from 5 V to
+P3.1. The header pin order is not obvious: see docs/HARDWARE.md. Then:
 
 ```sh
 make -C firmware info       PORT=/dev/ttyUSB1   # read-only handshake

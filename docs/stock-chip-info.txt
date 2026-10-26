@@ -1,0 +1,30 @@
+# stcgal handshake on a stock SainSmart 101-70-208 (read-only, before any flashing)
+# 2026-10-25T23:43Z, stcgal 1.10, -P stc15
+
+Waiting for MCU, please cycle power: done
+Target model:
+  Name: STC15W401AS
+  Magic: F52A
+  Code flash: 1.0 KB
+  EEPROM flash: 12.0 KB
+Target frequency: 11.057 MHz
+Target BSL version: 7.2.5T
+Target wakeup frequency: 37.550 KHz
+Target options:
+  reset_pin_enabled=False
+  clock_source=internal
+  clock_gain=high
+  watchdog_por_enabled=False
+  watchdog_stop_idle=True
+  watchdog_prescale=256
+  low_voltage_reset=True
+  low_voltage_threshold=3
+  eeprom_lvd_inhibit=True
+  eeprom_erase_enabled=False
+  bsl_pindetect_enabled=False
+  por_reset_delay=long
+  rstout_por_state=high
+  uart2_passthrough=False
+  uart2_pin_mode=normal
+  cpu_core_voltage=unknown
+Disconnected!

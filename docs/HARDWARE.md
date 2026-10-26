@@ -31,15 +31,29 @@ from lite to full.
   -> 220R -> CH340 RXD. The firmware moves UART1 to these pins.
 - STC's ROM bootloader only listens on **P3.0/P3.1**, so the board's own USB
   port **cannot** program the chip.
-- The 4-pin header next to the TX/RX LEDs is VCC, GND, P3.0, P3.1: the ISP
-  port. Use a 5 V USB-TTL adapter: adapter TX -> P3.0, adapter RX -> P3.1,
-  GND -> GND. Leave adapter VCC disconnected; power the board normally.
-  Verify the pin order with a meter.
+- The 4-pin header between the CH340 and U1 is the ISP port. Verified on a
+  board by elimination (not the order the schematic text suggests). With the
+  board oriented as in the photos (U2 above the header, C3 below it):
+
+  | Header pin | Signal | USB-TTL adapter |
+  |---|---|---|
+  | top (U2 end) | P3.1, MCU TX (also drives K7) | adapter RX |
+  | 2nd | P3.0, MCU RX (also drives K8) | adapter TX |
+  | 3rd | GND | GND |
+  | bottom (C3 end) | VCC 5 V | leave open (board on its own USB) |
+
+- **Add a 1 kohm pull-up from the bottom pin (5 V) to the top pin (P3.1).**
+  The ULN2803 input on P3.1 loads the bootloader's quasi-bidirectional TX so
+  much that its high level sags and the adapter reads garbage (relay 7
+  chatters at boot). With the pull-up the handshake works first time.
+- PL2303 console cables: colors vary. On ours **white = TX, green = RX**
+  (the reverse of Adafruit's). Check with a loopback and a relay test.
 - The bootloader only runs right after a cold power-up: start `make info`
-  or `make flash`, then power-cycle the board when stcgal waits.
-- If stcgal never connects, the adapter's TX line is probably back-powering
-  the MCU so it never fully resets. Put ~1 kohm in series with TX, or
-  unplug TX during the power-cycle.
+  or `make flash`, then unplug and replug the board's USB when stcgal waits.
+  Relay 8 blips (adapter TX idling high on P3.0) and relay 7 chatters while
+  the bootloader answers.
+- The adapter's TX idling high can back-power the MCU through P3.0 while the
+  board is unplugged; keep the power-off short (about 1 s) or unplug TX.
 
 ## Relay -> pin map
 
@@ -73,6 +87,13 @@ LEDs and listen for clicks. If any twitch:
 - flash with `-o bsl_pindetect_enabled=true`: the bootloader is skipped
   unless P3.2 and P3.3 are held low at power-up, which shortens the window.
   Reflashing then needs those two pins grounded during power-up.
+
+## Stock chip settings
+
+Read with stcgal before flashing: `docs/stock-chip-info.txt`. STC15W401AS,
+BSL 7.2.5T, stock firmware clocked at 11.0592 MHz (relay16 trims the RC to
+22.1184 MHz when flashing), reset pin already disabled, EEPROM erase on
+programming already off.
 
 ## Stock firmware (for reference)
 

@@ -9,7 +9,9 @@
 # PORT is the USB-TTL adapter on the 4-pin ISP header, not the board's USB.
 # Lite and full share the EEPROM layout, so a board keeps its ID either way.
 
-PORT      ?= /dev/ttyUSB1
+# default: the first serial adapter that is not a CH340 (the board's own USB).
+# ttyUSB numbers swap when devices are plugged in; by-id names do not.
+PORT      ?= $(firstword $(filter-out %1a86%,$(wildcard /dev/serial/by-id/*)))
 CODE_SIZE ?= 8192
 STCGAL    ?= $(HOME)/.local/bin/stcgal
 TRIM_KHZ  ?= 22118.4
