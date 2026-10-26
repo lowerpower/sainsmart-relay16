@@ -143,6 +143,34 @@ host/relay16.py -b 3 bench               # round-trip latency
 make -C linux install                    # /dev/relay16-3 on Linux
 ```
 
+## Related projects
+
+The rest of the fire-control chain these boards plug into, all at
+[github.com/lowerpower](https://github.com/lowerpower):
+
+```
+MIDI keyboard -> midi-2-relay --+
+                                +-- UDP "set <hex>" --> usb-relay --> relay boards
+web UI (fire-controller-web) ---+
+```
+
+- [SainSmartUsbRelay](https://github.com/lowerpower/SainSmartUsbRelay):
+  `usb-relay`, the C controller the rigs run today. Finds every SainSmart
+  USB-HID board, gangs them into one long bitmask, and takes `set <hex>`
+  commands interactively or over UDP. It drives the HID boards through
+  hidraw; running relay16 boards from it means adding a serial backend,
+  which is straightforward since its masks map directly onto `h XXXX`.
+- [midi-2-relay](https://github.com/lowerpower/midi-2-relay): reads MIDI
+  from a serial port, maps notes to relay outputs with a map file, and
+  sends `set <hex>` over UDP to the relay controller.
+- [fire-controller-web](https://github.com/lowerpower/fire-controller-web):
+  the web UI for the fire controller (Flower Tower, Medusa), with riff files
+  for sequences and per-piece personalities.
+- [udpsend](https://github.com/lowerpower/udpsend): a command-line UDP
+  packet sender, handy for poking the controller's UDP port by hand.
+- [relay](https://github.com/lowerpower/relay): an earlier (2015) Node.js
+  take on multi-board HID control with file playback, kept for history.
+
 ## Author
 
 Mike Johnson (Mycal), https://anchorid.net/resolve/4ff7ed97-b78f-4ae6-9011-5af714ee241c
