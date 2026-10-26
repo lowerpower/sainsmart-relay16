@@ -24,11 +24,13 @@ Hardware, flashing and pin map: [docs/HARDWARE.md](docs/HARDWARE.md)
 We run the fire effects on the Reared In Steel crew's pieces at Burning Man:
 propane poofers, bigger propane effects and igniters on stacks of 16-channel
 relay boards, sequenced live from MIDI (an 88-key keyboard, a MIDI controller
-and a web interface).
+and a web interface). Fire Cathedral runs seven boards; Medusa and Flower
+Tower run three or four each.
 
 We built that rig on SainSmart's USB-HID 16-channel boards, driven by
 [SainSmartUsbRelay](https://github.com/lowerpower/SainSmartUsbRelay)
-(`usb-relay`). They were fast, and you can't get them any more. The current
+(`usb-relay`). They were fast, they now have hundreds of thousands of clicks
+on them, and you can't get them any more. The current
 board, the 101-70-208, has a CH340 serial port instead, and the plug-in
 controller boards for the relay modules are serial now too. The stock serial
 firmware is far slower than the old HID boards: 9600 baud Modbus ASCII, one
@@ -36,8 +38,8 @@ firmware is far slower than the old HID boards: 9600 baud Modbus ASCII, one
 lands over half a second late. It also never reports what the relays are
 actually doing; every command just comes back as an echo.
 
-Under the CH340 sits an STC 8051 that can be reflashed through a 4-pin header.
-This firmware turns these serial boards into fast, reactive boards that scream
+So this is the replacement. Under the CH340 sits an STC 8051 that can be
+reflashed through a 4-pin header. This firmware turns these serial boards into fast, reactive boards that scream
 out our MIDI sequences at sub-10 ms resolution, better than the old HID boards
 we loved: one command sets all 16 relays in about 4 ms, and the reply is the
 real relay state.
