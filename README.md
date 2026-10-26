@@ -20,6 +20,7 @@ The relay16 firmware gives:
 
 Protocol: [docs/PROTOCOL.md](docs/PROTOCOL.md).
 Speed tests: [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
+Board IDs and board order: [docs/BOARD-IDS.md](docs/BOARD-IDS.md).
 Hardware, flashing and pin map: [docs/HARDWARE.md](docs/HARDWARE.md)
 ([photos](docs/HARDWARE.md#photos)).
 
@@ -139,6 +140,10 @@ make -C firmware flash        # 404AS/408AS; EEPROM kept
 
 ## Set up boards
 
+Each board needs its own ID before it goes in a rig. How to set it, how to
+choose IDs, and how `usb-relay` turns IDs into board order:
+[docs/BOARD-IDS.md](docs/BOARD-IDS.md).
+
 ```sh
 host/relay16.py -p /dev/ttyUSB0 i 3      # plug in alone, give it an ID
 host/relay16.py -p /dev/ttyUSB0 w        # save
@@ -163,8 +168,8 @@ web UI (fire-controller-web) ---+
   `usb-relay`, the C controller the rigs run today. Finds every SainSmart
   USB-HID board, gangs them into one long bitmask, and takes `set <hex>`
   commands interactively or over UDP. It drives the HID boards through
-  hidraw; running relay16 boards from it means adding a serial backend,
-  which is straightforward since its masks map directly onto `h XXXX`.
+  hidraw and relay16 boards over serial, placing each relay16 board by its
+  stored ID ([docs/BOARD-IDS.md](docs/BOARD-IDS.md)).
 - [midi-2-relay](https://github.com/lowerpower/midi-2-relay): reads MIDI
   from a serial port, maps notes to relay outputs with a map file, and
   sends `set <hex>` over UDP to the relay controller.
