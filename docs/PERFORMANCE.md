@@ -57,10 +57,27 @@ longer the limit: the relays are.
 
 ## SainSmart HID board, for comparison
 
-Pending. The older SainSmart USB-HID 16-channel boards (driven by
-[SainSmartUsbRelay](https://github.com/lowerpower/SainSmartUsbRelay)) are the
-boards this replaces; the plan is to run the same random-pattern test on one
-and add its numbers here.
+The older SainSmart USB-HID 16-channel controller (HID_RELAY_V1, Nuvoton,
+USB 0416:5020) is what this replaces; the rigs ran on it through
+[SainSmartUsbRelay](https://github.com/lowerpower/SainSmartUsbRelay). Same
+host, same day, driven through `/dev/hidraw` with `usb-relay`'s commands
+(0xC3 write, 0xD2 read back). "Confirmed" means write, then read the state
+back until it matches, as `usb-relay` does with verify on; it matched on
+the first read every time.
+
+| Test | HID board | relay16 serial board |
+|---|---|---|
+| Read state, median | 2.00 ms (p99 2.02) | 3.00 ms (p99 4.60) |
+| 1000 random patterns, confirmed, flat out | 330/s; median 3.00 ms, p99 3.38, max 26.25 | 277/s; median 3.25 ms, p99 5.64, max 6.99 |
+| 400 random patterns at 20/s, confirmed | median 3.01 ms, max 6.19; 0 late | median 4.04 ms, max 9.60; 0 late |
+| Write only, no confirmation | 1000/s, 1.00 ms each (one USB frame) | not offered: every command gets a reply |
+
+**On par.** A confirmed 16-relay update takes about 3 ms on the HID board and
+about 3.25 ms on the reflashed serial board; both stay well inside 10 ms and
+well ahead of what the relays can mechanically follow. The HID board's
+fire-and-forget writes are faster (1 ms), and its reads are about 1 ms
+quicker. Roughly 1.1 ms of each serial round trip is bytes on the wire at
+115200 baud; the baud rate stays at 115200 by choice.
 
 ## Reproduce
 

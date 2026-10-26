@@ -41,9 +41,9 @@ actually doing; every command just comes back as an echo.
 
 So this is the replacement. Under the CH340 sits an STC 8051 that can be
 reflashed through a 4-pin header. This firmware turns these serial boards into fast, reactive boards that scream
-out our MIDI sequences at sub-10 ms resolution, better than the old HID boards
-we loved: one command sets all 16 relays in about 4 ms, and the reply is the
-real relay state.
+out our MIDI sequences at sub-10 ms resolution, on par with the old HID boards
+we loved: one command sets all 16 relays in about 3-4 ms, and the reply is
+the real relay state.
 
 Fire needs two more things:
 
