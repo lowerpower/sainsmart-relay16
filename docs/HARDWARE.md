@@ -115,6 +115,24 @@ LEDs and listen for clicks. If any twitch:
   unless P3.2 and P3.3 are held low at power-up, which shortens the window.
   Reflashing then needs those two pins grounded during power-up.
 
+### Results
+
+| Date | Board | Power | Cold starts | Relays at power-up | Firmware state after boot |
+|---|---|---|---|---|---|
+| 2026-10-25 | board 1, lite firmware | USB (jumper on USB) | 11 (3 with 5 s off) | no clicks or flickers on any relay | `0000` every time |
+| pending | | 9-36 V supply, jumper off (field setup) | | | |
+
+Setup: programming cable and pull-up resistor removed from the ISP header,
+nothing on the relay contacts. A host script logged every boot and read the
+relay state back within half a second of the board appearing on USB.
+
+Note: with the programming cable still attached, relay 8 does come on for
+about a second at power-up. That is the cable's TX line idling high on P3.0,
+not the board; remove the cable before field use.
+
+Still to do: repeat on the 9-36 V supply with the jumper off, the way the
+boards run on the rigs.
+
 ## Stock chip settings
 
 Read with stcgal before flashing: `docs/stock-chip-info.txt`. STC15W401AS,
