@@ -7,7 +7,7 @@ see `vendor/README.md`.
 
 | Ref | Part | Notes |
 |---|---|---|
-| U1 | STC15W401AS, SOP-20 | 8051, 1 KB code, 512 B RAM (256 idata + 256 xdata), 5 KB EEPROM, internal RC |
+| U1 | STC15W401AS, SOP-20 | 8051, 1 KB code, 512 B RAM (256 idata + 256 xdata), EEPROM (stcgal reports 12 KB), internal RC |
 | U3 | CH340G + 12 MHz crystal | USB serial, no serial number |
 | U2, U4 | ULN2803 | relay drivers; MCU pin high = relay on |
 | V1 | LM2576-5.0 | 9-36 V in, 5 V for MCU and SRD-05VDC relays |
@@ -54,6 +54,31 @@ from lite to full.
   the bootloader answers.
 - The adapter's TX idling high can back-power the MCU through P3.0 while the
   board is unplugged; keep the power-off short (about 1 s) or unplug TX.
+
+### Photos
+
+**ISP header pinout.** Header soldered into the 4 holes between the CH340
+(U3) and U1; same orientation as the table above (U2 above, C3 below).
+
+![ISP header pinout](images/isp-header-pinout.jpg)
+
+**Working flash setup.** PL2303 cable: green (its RX) on the top pin, white
+(its TX) on the 2nd, black (GND) on the 3rd, red (5 V) left loose. The 1 kohm
+resistor runs from the top pin to a separate green jumper on the bottom pin
+(5 V); that jumper is not the cable's green wire. Board powered from its own
+USB, jumper on USB.
+
+![Working ISP wiring](images/isp-wiring.jpg)
+
+**PL2303 console cable.** On this one white is TX and green is RX; other
+cables use the opposite colors, so check before trusting them.
+
+![PL2303 cable](images/pl2303-cable.jpg)
+
+**MCU area before the header was fitted.** U1 (STC15W401AS), U2/U4 (ULN2803),
+the USB/COM power jumper, the TX/RX LEDs and the 4 empty ISP holes below U2.
+
+![Board MCU area](images/board-mcu-area.jpg)
 
 ## Relay -> pin map
 
