@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Copyright (c) 2025-2026 Mike Johnson (Mycal)
+# SPDX-License-Identifier: MIT
+# https://github.com/lowerpower/sainsmart-relay16
 """Lite firmware tests: the assembled 8051 binary runs in ucsim.
 
 The SIM build differs from the board build only in baud clock, tick timer

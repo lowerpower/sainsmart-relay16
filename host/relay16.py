@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Copyright (c) 2025-2026 Mike Johnson (Mycal)
+# SPDX-License-Identifier: MIT
+# https://github.com/lowerpower/sainsmart-relay16
 """relay16 - host library and CLI for SainSmart 101-70-208 boards running
 the relay16 firmware (protocol: docs/PROTOCOL.md).
 

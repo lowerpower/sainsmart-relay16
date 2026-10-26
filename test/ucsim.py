@@ -1,3 +1,6 @@
+# Copyright (c) 2025-2026 Mike Johnson (Mycal)
+# SPDX-License-Identifier: MIT
+# https://github.com/lowerpower/sainsmart-relay16
 """Run a relay16 firmware binary in ucsim (8051 simulator) for tests.
 
 The UART is connected through two FIFOs; ucsim's command console (TCP) is

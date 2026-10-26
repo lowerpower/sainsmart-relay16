@@ -1,4 +1,7 @@
 #!/usr/bin/python3 -I
+# Copyright (c) 2025-2026 Mike Johnson (Mycal)
+# SPDX-License-Identifier: MIT
+# https://github.com/lowerpower/sainsmart-relay16
 """udev PROGRAM helper: print the relay16 board ID on a serial port.
 
 Exits 1 (no symlink) for unassigned boards (ID 0), stock-firmware boards

@@ -1,4 +1,4 @@
-# sainsmart_new
+# sainsmart-relay16
 
 Replacement firmware and host tools for the **SainSmart 101-70-208**
 16-channel 9-36 V USB relay board, whose stock serial firmware is slow
@@ -139,3 +139,9 @@ host/relay16.py -b 3 walk                # click relays 1-16 on board 3
 host/relay16.py -b 3 bench               # round-trip latency
 make -C linux install                    # /dev/relay16-3 on Linux
 ```
+
+## License
+
+MIT, see [LICENSE](LICENSE). Copyright (c) 2025-2026 Mike Johnson (Mycal).
+SainSmart's vendor files (schematic, tools) are not included and are not
+covered by this license.

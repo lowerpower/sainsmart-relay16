@@ -1,3 +1,7 @@
+# Copyright (c) 2025-2026 Mike Johnson (Mycal)
+# SPDX-License-Identifier: MIT
+# https://github.com/lowerpower/sainsmart-relay16
+#
 # relay16: stable device names from the board ID stored in EEPROM.
 #   board with ID 3 -> /dev/relay16-3, on every boot and any USB port
 # Install: make -C linux install

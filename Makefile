@@ -1,3 +1,7 @@
+# Copyright (c) 2025-2026 Mike Johnson (Mycal)
+# SPDX-License-Identifier: MIT
+# https://github.com/lowerpower/sainsmart-relay16
+
 all:
 	$(MAKE) -C firmware
 	$(MAKE) -C sim

@@ -7,6 +7,10 @@
  *   sim -v                    log relay changes to stderr
  *
  * Ticks run in real time (1 ms), so pulses and timeouts behave as on the board.
+ *
+ * Copyright (c) 2025-2026 Mike Johnson (Mycal)
+ * SPDX-License-Identifier: MIT
+ * https://github.com/lowerpower/sainsmart-relay16
  */
 #define _DEFAULT_SOURCE
 #include <errno.h>

@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Copyright (c) 2025-2026 Mike Johnson (Mycal)
+# SPDX-License-Identifier: MIT
+# https://github.com/lowerpower/sainsmart-relay16
 """Protocol tests: run the real firmware core in sim/sim on a pty and drive
 it through host/relay16.py, the same library used with real boards.
 

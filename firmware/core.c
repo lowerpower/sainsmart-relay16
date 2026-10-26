@@ -13,6 +13,10 @@
  *   core_rx(c)            for every received byte (may be from an ISR)
  *   core_poll()           continuously from the main loop
  *   core_tick()           once per millisecond from the main loop
+ *
+ * Copyright (c) 2025-2026 Mike Johnson (Mycal)
+ * SPDX-License-Identifier: MIT
+ * https://github.com/lowerpower/sainsmart-relay16
  */
 #include "compat.h"
 

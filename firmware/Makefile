@@ -1,3 +1,7 @@
+# Copyright (c) 2025-2026 Mike Johnson (Mycal)
+# SPDX-License-Identifier: MIT
+# https://github.com/lowerpower/sainsmart-relay16
+#
 # relay16 firmware for the SainSmart 101-70-208
 #
 #   make lite                 lite build, 8051 asm, fits the stock 1 KB STC15W401AS

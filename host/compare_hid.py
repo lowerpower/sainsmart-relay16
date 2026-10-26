@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Copyright (c) 2025-2026 Mike Johnson (Mycal)
+# SPDX-License-Identifier: MIT
+# https://github.com/lowerpower/sainsmart-relay16
 """Head-to-head: an old SainSmart USB-HID 16-channel board vs a relay16 board.
 
 Both get the same random 16-relay patterns, back to back, each confirmed:
