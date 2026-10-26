@@ -19,7 +19,7 @@ The relay16 firmware gives:
    alt="SainSmart 101-70-208 16-channel serial relay board"></p>
 
 Protocol: [docs/PROTOCOL.md](docs/PROTOCOL.md).
-Speed tests: [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
+Speed tests: [docs/PERFORMANCE.md](docs/PERFORMANCE.md) ([videos](docs/PERFORMANCE.md#videos)).
 Board IDs and board order: [docs/BOARD-IDS.md](docs/BOARD-IDS.md).
 Hardware, flashing and pin map: [docs/HARDWARE.md](docs/HARDWARE.md)
 ([photos](docs/HARDWARE.md#photos)).

@@ -96,6 +96,17 @@ correct on both: on par. The HID board is a little steadier (4 ms worst vs
 
 Run it with `host/compare_hid.py /dev/hidrawN /dev/serial/by-id/usb-1a86_... [COUNT] [SEED]`.
 
+## Videos
+
+Filmed on the bench during these tests (portrait, 720x1280, with sound so
+you can hear the relays).
+
+| Video | What it shows |
+|---|---|
+| [fastAsCanGo_SDR.mp4](video/fastAsCanGo_SDR.mp4) (8 s) | 1000 random 16-relay patterns as fast as the board takes them (~277/s): the board sets every pattern, but the relays can only buzz |
+| [20writesAsecond.mp4](video/20writesAsecond.mp4) (23 s) | random patterns at 20 updates per second: each pattern visibly lands |
+| [HIDvsSerial.mp4](video/HIDvsSerial.mp4) (24 s) | the head to head above: the old HID board, then the relay16 board, same 1000 patterns |
+
 ## Reproduce
 
 ```sh
