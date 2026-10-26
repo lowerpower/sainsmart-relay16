@@ -1,7 +1,16 @@
-# Copyright (c) 2025-2026 Mike Johnson (Mycal)
-# SPDX-License-Identifier: MIT
-# https://github.com/lowerpower/sainsmart-relay16
+# sainsmart-relay16 - fast, indexable, fail-safe firmware and host tools
+# for SainSmart 16-channel USB relay boards
 #
+# Copyright (c) 2025-2026 Mike Johnson (Mycal)
+#
+# Author:       https://anchorid.net/resolve/4ff7ed97-b78f-4ae6-9011-5af714ee241c
+# Repository:   https://github.com/lowerpower/sainsmart-relay16
+#
+# SPDX-License-Identifier: MIT
+# See LICENSE file for full terms.
+#
+# Built for the Reared In Steel crew's fire art.
+
 # relay16: stable device names from the board ID stored in EEPROM.
 #   board with ID 3 -> /dev/relay16-3, on every boot and any USB port
 # Install: make -C linux install

@@ -140,6 +140,10 @@ host/relay16.py -b 3 bench               # round-trip latency
 make -C linux install                    # /dev/relay16-3 on Linux
 ```
 
+## Author
+
+Mike Johnson (Mycal), https://anchorid.net/resolve/4ff7ed97-b78f-4ae6-9011-5af714ee241c
+
 ## License
 
 MIT, see [LICENSE](LICENSE). Copyright (c) 2025-2026 Mike Johnson (Mycal).

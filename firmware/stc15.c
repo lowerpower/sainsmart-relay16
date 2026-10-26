@@ -1,3 +1,18 @@
+/**
+ * sainsmart-relay16 - fast, indexable, fail-safe firmware and host tools
+ * for SainSmart 16-channel USB relay boards
+ *
+ * Copyright (c) 2025-2026 Mike Johnson (Mycal)
+ *
+ * Author:       https://anchorid.net/resolve/4ff7ed97-b78f-4ae6-9011-5af714ee241c
+ * Repository:   https://github.com/lowerpower/sainsmart-relay16
+ *
+ * SPDX-License-Identifier: MIT
+ * See LICENSE file for full terms.
+ *
+ * Built for the Reared In Steel crew's fire art.
+ */
+
 /*
  * stc15.c - relay16 firmware, STC15W401AS on the SainSmart 101-70-208
  *
@@ -8,10 +23,6 @@
  *   K1 P5.5  K2 P5.4  K3 P3.5  K4 P3.4  K5 P3.3  K6 P3.2  K7 P3.1  K8 P3.0
  *   K9 P1.1  K10 P1.0 K11-K16 P1.2-P1.7
  * P5.4 is the reset pin: flash with reset_pin_enabled=false.
- *
- * Copyright (c) 2025-2026 Mike Johnson (Mycal)
- * SPDX-License-Identifier: MIT
- * https://github.com/lowerpower/sainsmart-relay16
  */
 #include <8051.h>
 #include "compat.h"

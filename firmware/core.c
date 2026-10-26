@@ -1,3 +1,18 @@
+/**
+ * sainsmart-relay16 - fast, indexable, fail-safe firmware and host tools
+ * for SainSmart 16-channel USB relay boards
+ *
+ * Copyright (c) 2025-2026 Mike Johnson (Mycal)
+ *
+ * Author:       https://anchorid.net/resolve/4ff7ed97-b78f-4ae6-9011-5af714ee241c
+ * Repository:   https://github.com/lowerpower/sainsmart-relay16
+ *
+ * SPDX-License-Identifier: MIT
+ * See LICENSE file for full terms.
+ *
+ * Built for the Reared In Steel crew's fire art.
+ */
+
 /*
  * core.c - relay16 protocol core (see docs/PROTOCOL.md)
  *
@@ -13,10 +28,6 @@
  *   core_rx(c)            for every received byte (may be from an ISR)
  *   core_poll()           continuously from the main loop
  *   core_tick()           once per millisecond from the main loop
- *
- * Copyright (c) 2025-2026 Mike Johnson (Mycal)
- * SPDX-License-Identifier: MIT
- * https://github.com/lowerpower/sainsmart-relay16
  */
 #include "compat.h"
 
