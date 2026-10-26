@@ -178,8 +178,6 @@ web UI (fire-controller-web) ---+
   for sequences and per-piece personalities.
 - [udpsend](https://github.com/lowerpower/udpsend): a command-line UDP
   packet sender, handy for poking the controller's UDP port by hand.
-- [relay](https://github.com/lowerpower/relay): an earlier (2015) Node.js
-  take on multi-board HID control with file playback, kept for history.
 
 ## Author
 
