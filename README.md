@@ -16,7 +16,37 @@ The relay16 firmware gives:
   interlock
 
 Protocol: [docs/PROTOCOL.md](docs/PROTOCOL.md).
-Hardware, flashing and pin map: [docs/HARDWARE.md](docs/HARDWARE.md).
+Hardware, flashing and pin map: [docs/HARDWARE.md](docs/HARDWARE.md)
+([photos](docs/HARDWARE.md#photos)).
+
+## Why
+
+These relay boards fire the flame effects on the Reared In Steel crew's
+pieces at Burning Man, played live from an 88-key MIDI keyboard, a MIDI
+controller and a web interface. The rig started with the Flower Tower on
+SainSmart's older USB-HID 16-channel boards, seven of them ganged together by
+[SainSmartUsbRelay](https://github.com/lowerpower/SainSmartUsbRelay)
+(`usb-relay`), fast enough that the fire keeps up with the keys.
+
+The board SainSmart lists now, the 101-70-208, replaced HID with a CH340
+serial port, and its firmware is too slow to play: 9600 baud Modbus ASCII,
+one 17-byte command per relay at about 40 ms each, so a chord across 16
+relays lands over half a second late. It also never reports what the relays
+are actually doing; every command just comes back as an echo.
+
+Under the CH340 sits an STC 8051 that can be reflashed through a 4-pin
+header, so instead of retiring the boards, this replaces the firmware:
+
+- **Fast enough to play:** one command sets all 16 relays in about 4 ms, and
+  the reply is the real relay state.
+- **Fail-safe for fire:** the firmware starts with every relay off, and a
+  host-silence failsafe drops them all if the controller stops talking. The
+  full build adds board-timed pulses and a per-relay max-on limit, so a valve
+  closes on time even if the host crashes mid-burst.
+- **Many boards, stable numbering:** each board stores its own ID, so a rig
+  of eight comes back in the same order after every reboot, on any USB port.
+- **Same masks as before:** `h F0F0` means what `set F0F0` meant in
+  `usb-relay`, so the old show logic carries over.
 
 ## Two builds
 
@@ -65,14 +95,23 @@ sim/sim -v      # type: s 1 / h f0f0 / p 3 500 / r / v
 
 ## Flash a board
 
-USB-TTL adapter on the 4-pin ISP header, with the 1 kohm pull-up from 5 V to
-P3.1. The header pin order is not obvious: see docs/HARDWARE.md. Then:
+USB-TTL adapter on the 4-pin ISP header, with a 1 kohm pull-up from 5 V to
+P3.1. The pin order is not what the schematic suggests:
+
+![ISP header pinout](docs/images/isp-header-pinout.jpg)
+
+Adapter RX to P3.1, adapter TX to P3.0, GND to GND, adapter 5 V left open
+(the board runs from its own USB). The setup that flashed the first board,
+and cable color notes, are in [docs/HARDWARE.md](docs/HARDWARE.md#photos).
 
 ```sh
-make -C firmware info       PORT=/dev/ttyUSB1   # read-only handshake
-make -C firmware flash-lite PORT=/dev/ttyUSB1   # stock chip; EEPROM kept
-make -C firmware flash      PORT=/dev/ttyUSB1   # 404AS/408AS; EEPROM kept
+make -C firmware info         # read-only handshake, then replug the board's USB
+make -C firmware flash-lite   # stock chip; EEPROM (ID, settings) kept
+make -C firmware flash        # 404AS/408AS; EEPROM kept
 ```
+
+`PORT` defaults to the first serial adapter that isn't the board's CH340
+(`/dev/serial/by-id/...`); pass `PORT=...` to choose another.
 
 ## Set up boards
 
