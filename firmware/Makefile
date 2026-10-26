@@ -15,6 +15,7 @@
 #
 #   make lite                 lite build, 8051 asm, fits the stock 1 KB STC15W401AS
 #   make full                 full build, C, ~2.2 KB: needs an STC15W404AS/408AS
+#                             (NOT YET TESTED ON REAL HARDWARE)
 #   make info PORT=...        read-only bootloader handshake (no erase)
 #   make flash-lite PORT=...  program the lite build; EEPROM (ID, settings) kept
 #   make flash PORT=...       program the full build;  EEPROM kept

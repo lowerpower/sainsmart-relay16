@@ -17,10 +17,10 @@ see `vendor/README.md`.
 
 ## Code space: lite or full
 
-| Build | Source | Size | Chip |
-|---|---|---|---|
-| lite | `firmware/lite/relay16_lite.asm` (8051 asm) | ~790 B | stock STC15W401AS (1 KB) |
-| full | `firmware/core.c` + `stc15.c` (C) | ~2.2 KB | STC15W404AS (4 KB) or STC15W408AS (8 KB) |
+| Build | Source | Size | Chip | On real hardware |
+|---|---|---|---|---|
+| lite | `firmware/lite/relay16_lite.asm` (8051 asm) | ~790 B | stock STC15W401AS (1 KB) | verified |
+| full | `firmware/core.c` + `stc15.c` (C) | ~2.2 KB | STC15W404AS (4 KB) or STC15W408AS (8 KB) | **not yet tested** |
 
 The 404AS/408AS are the same series, same SOP-20 footprint and pinout. The
 lite build checks itself against 1 KB at build time (`make -C firmware lite`).

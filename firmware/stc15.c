@@ -21,6 +21,11 @@
  * watchdog and the EEPROM (IAP). The protocol itself is core.c, #included
  * below, so this file only has to supply core.c's hw_ hooks and a main loop.
  *
+ * STATUS: NOT YET TESTED ON REAL HARDWARE. The protocol (core.c) is tested
+ * in the Linux simulator, but this file - pins, UART interrupt, timers, IAP
+ * EEPROM - has never run on a chip. Verify it on a bench board (relay walk,
+ * failsafe, EEPROM persistence, power-up state) before trusting it.
+ *
  * Needs a 4 KB or 8 KB part (STC15W404AS / STC15W408AS, same SOP-20 pinout):
  * the full build is ~2.2 KB. The stock 1 KB STC15W401AS runs the lite build
  * (firmware/lite/relay16_lite.asm) instead.

@@ -73,6 +73,7 @@ old show logic carries over.
 | Source | 8051 assembly, ~790 bytes | C, ~2.2 KB |
 | Commands | `r s c h t i w v` | adds `p d m` |
 | Tested | the assembled binary, in ucsim (17 tests) | the C core, in a Linux simulator (19 tests) |
+| On real hardware | **verified** (see below) | **not yet tested** |
 
 Both share the EEPROM layout, so IDs survive moving a board from lite to full.
 
@@ -82,7 +83,11 @@ Setting all 16 relays with a confirmed reply takes 3-4 ms; 1000 random
 patterns ran at 277 updates/s with every reply correct and nothing over
 7 ms (stock firmware: ~40 ms per relay, no status). Details in
 [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
-The full build has not run on hardware yet (needs a 404AS/408AS).
+**The full build has not been tested on real hardware.** It has only run in
+the Linux simulator; the STC15-specific parts (`firmware/stc15.c`: pins, UART
+interrupt, timers, IAP EEPROM) have never executed on a chip, and it needs a
+chip swap to a 404AS/408AS before it can. Treat it as untested until it has
+been flashed and checked the way the lite build was.
 
 ## Layout
 
