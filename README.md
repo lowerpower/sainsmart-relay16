@@ -24,7 +24,7 @@ Hardware, flashing and pin map: [docs/HARDWARE.md](docs/HARDWARE.md)
 We run the fire effects on the Reared In Steel crew's pieces at Burning Man:
 propane poofers, bigger propane effects and igniters on stacks of 16-channel
 relay boards, sequenced live from MIDI (an 88-key keyboard, a MIDI controller
-and a web interface). [Fire Kathedral](https://mycal.net/terms/fire-kathedral/)
+and a web interface). [Fire Kethedral](https://mycal.net/terms/fire-kathedral/)
 runs seven boards; Medusa and Flower Tower run three or four each.
 
 We built that rig on SainSmart's USB-HID 16-channel boards, driven by
