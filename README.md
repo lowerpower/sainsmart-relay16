@@ -15,6 +15,9 @@ The relay16 firmware gives:
 - full build only: board-timed pulses (`p 3 250`) and a per-relay max-on
   interlock
 
+<p align="center"><img src="docs/images/sainsmart-101-70-208.jpg" width="360"
+   alt="SainSmart 101-70-208 16-channel serial relay board"></p>
+
 Protocol: [docs/PROTOCOL.md](docs/PROTOCOL.md).
 Speed tests: [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
 Hardware, flashing and pin map: [docs/HARDWARE.md](docs/HARDWARE.md)

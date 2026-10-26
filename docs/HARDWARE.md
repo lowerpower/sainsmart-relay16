@@ -3,6 +3,8 @@
 16-channel 9-36 V USB relay module. Vendor package (schematic, code table):
 see `vendor/README.md`.
 
+![SainSmart 101-70-208](images/sainsmart-101-70-208.jpg)
+
 ## Parts
 
 | Ref | Part | Notes |
