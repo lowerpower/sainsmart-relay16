@@ -18,6 +18,8 @@ The relay16 firmware gives:
 <p align="center"><img src="docs/images/sainsmart-101-70-208.jpg" width="360"
    alt="SainSmart 101-70-208 16-channel serial relay board"></p>
 
+The story behind it: [Finally, a Replacement for the Relay Boards We Can't Buy Anymore](https://blog.mycal.net/finally-a-replacement-for-the-relay-boards-we-cant-buy-anymore/).
+
 Protocol: [docs/PROTOCOL.md](docs/PROTOCOL.md).
 Speed tests: [docs/PERFORMANCE.md](docs/PERFORMANCE.md) ([videos](docs/PERFORMANCE.md#videos)).
 Board IDs and board order: [docs/BOARD-IDS.md](docs/BOARD-IDS.md).
