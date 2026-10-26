@@ -79,6 +79,23 @@ fire-and-forget writes are faster (1 ms), and its reads are about 1 ms
 quicker. Roughly 1.1 ms of each serial round trip is bytes on the wire at
 115200 baud; the baud rate stays at 115200 by choice.
 
+### Head to head
+
+Back to back on the same host, the HID board first and the relay16 board
+3 seconds later, both fed the **same** 1000 random patterns (seed 2026),
+each update confirmed before the next:
+
+| | Total | Rate | Median | p99 | Max | Wrong |
+|---|---|---|---|---|---|---|
+| HID board | 3.00 s | 333/s | 3.00 ms | 3.01 ms | 4.00 ms | 0 |
+| relay16 lite | 3.52 s | 284/s | 3.25 ms | 5.16 ms | 7.00 ms | 0 |
+
+Half a second apart over 1000 confirmed 16-relay updates, every pattern
+correct on both: on par. The HID board is a little steadier (4 ms worst vs
+7 ms); both stay comfortably inside 10 ms.
+
+Run it with `host/compare_hid.py /dev/hidrawN /dev/serial/by-id/usb-1a86_... [COUNT] [SEED]`.
+
 ## Reproduce
 
 ```sh
