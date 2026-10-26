@@ -21,32 +21,43 @@ Hardware, flashing and pin map: [docs/HARDWARE.md](docs/HARDWARE.md)
 
 ## Why
 
-These relay boards fire the flame effects on the Reared In Steel crew's
-pieces at Burning Man, played live from an 88-key MIDI keyboard, a MIDI
-controller and a web interface. The rig started with the Flower Tower on
-SainSmart's older USB-HID 16-channel boards, seven of them ganged together by
+We run the fire effects on the Reared In Steel crew's pieces at Burning Man:
+propane poofers, bigger propane effects and igniters on stacks of 16-channel
+relay boards, sequenced live from MIDI (an 88-key keyboard, a MIDI controller
+and a web interface).
+
+We built that rig on SainSmart's USB-HID 16-channel boards, driven by
 [SainSmartUsbRelay](https://github.com/lowerpower/SainSmartUsbRelay)
-(`usb-relay`), fast enough that the fire keeps up with the keys.
+(`usb-relay`). They were fast, and you can't get them any more. The current
+board, the 101-70-208, has a CH340 serial port instead, and the plug-in
+controller boards for the relay modules are serial now too. The stock serial
+firmware is far slower than the old HID boards: 9600 baud Modbus ASCII, one
+17-byte command per relay at about 40 ms each, so a chord across 16 relays
+lands over half a second late. It also never reports what the relays are
+actually doing; every command just comes back as an echo.
 
-The board SainSmart lists now, the 101-70-208, replaced HID with a CH340
-serial port, and its firmware is too slow to play: 9600 baud Modbus ASCII,
-one 17-byte command per relay at about 40 ms each, so a chord across 16
-relays lands over half a second late. It also never reports what the relays
-are actually doing; every command just comes back as an echo.
+Under the CH340 sits an STC 8051 that can be reflashed through a 4-pin header.
+This firmware turns these serial boards into fast, reactive boards that scream
+out our MIDI sequences at sub-10 ms resolution, better than the old HID boards
+we loved: one command sets all 16 relays in about 4 ms, and the reply is the
+real relay state.
 
-Under the CH340 sits an STC 8051 that can be reflashed through a 4-pin
-header, so instead of retiring the boards, this replaces the firmware:
+Fire needs two more things:
 
-- **Fast enough to play:** one command sets all 16 relays in about 4 ms, and
-  the reply is the real relay state.
-- **Fail-safe for fire:** the firmware starts with every relay off, and a
-  host-silence failsafe drops them all if the controller stops talking. The
-  full build adds board-timed pulses and a per-relay max-on limit, so a valve
-  closes on time even if the host crashes mid-burst.
-- **Many boards, stable numbering:** each board stores its own ID, so a rig
-  of eight comes back in the same order after every reboot, on any USB port.
-- **Same masks as before:** `h F0F0` means what `set F0F0` meant in
-  `usb-relay`, so the old show logic carries over.
+- **The same relay on the same board, every time.** With boards stacked, our
+  software has to hit the same relay on the same board on every run. Firing
+  the 10-gallon propane bomb when we wanted a small poofer or an igniter is
+  not an option. The CH340 has no serial number, so each board stores its own
+  ID in EEPROM, and the host finds boards by that ID, whatever the USB port
+  or boot order. A missing or duplicate ID is an error; boards never
+  renumber to fill a gap.
+- **Nothing left on too long.** Relays always start off. A host-silence
+  failsafe drops every relay if the controller stops talking. The full build
+  adds board-timed pulses and a per-relay max-on limit, so a valve closes on
+  time even if the host crashes mid-burst.
+
+The hex masks match `usb-relay` (`h F0F0` does what `set F0F0` did), so the
+old show logic carries over.
 
 ## Two builds
 
