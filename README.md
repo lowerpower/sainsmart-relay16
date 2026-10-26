@@ -16,6 +16,7 @@ The relay16 firmware gives:
   interlock
 
 Protocol: [docs/PROTOCOL.md](docs/PROTOCOL.md).
+Speed tests: [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
 Hardware, flashing and pin map: [docs/HARDWARE.md](docs/HARDWARE.md)
 ([photos](docs/HARDWARE.md#photos)).
 
@@ -74,8 +75,10 @@ Both share the EEPROM layout, so IDs survive moving a board from lite to full.
 
 **Lite is verified on a real board** (2026-10-25): all commands, relay walk
 1-16 in order, failsafe timing, EEPROM save surviving a power cycle.
-Round trip 3.0 ms median; setting all 16 relays with a confirmed reply
-4.0 ms median, 5.2 ms p99 (stock firmware: ~40 ms per relay, no status).
+Setting all 16 relays with a confirmed reply takes 3-4 ms; 1000 random
+patterns ran at 277 updates/s with every reply correct and nothing over
+7 ms (stock firmware: ~40 ms per relay, no status). Details in
+[docs/PERFORMANCE.md](docs/PERFORMANCE.md).
 The full build has not run on hardware yet (needs a 404AS/408AS).
 
 ## Layout

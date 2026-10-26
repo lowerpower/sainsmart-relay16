@@ -171,7 +171,39 @@ USAGE = """commands:
   v                       firmware version and ID
   raw LINE...             send a line as-is
   walk [SECONDS]          click relays 1-16 in turn
-  bench [COUNT]           time round trips"""
+  bench [COUNT]           time round trips
+  perf [COUNT] [RATE]     random 16-relay patterns, confirmed; RATE per
+                          second (omit for as fast as possible)"""
+
+
+def perf(r, count, rate=None):
+    """Send `count` random set-all patterns, check every reply, report timing.
+    With `rate`, sends are paced to that many per second."""
+    import random
+    rnd = random.Random()
+    lat, bad, late = [], 0, 0
+    period = 1 / rate if rate else 0
+    t0 = time.perf_counter()
+    for i in range(count):
+        due = t0 + i * period
+        while period and time.perf_counter() < due:
+            pass
+        mask = rnd.randrange(1, 65536)
+        t = time.perf_counter()
+        try:
+            ok = r.set(mask) == mask
+        except Relay16Error:
+            ok = False
+        lat.append(time.perf_counter() - t)
+        bad += not ok
+        late += bool(period) and t - due > 0.005
+    total = time.perf_counter() - t0
+    r.all_off()
+    lat.sort()
+    print(f"{count} random patterns in {total:.2f} s = {count / total:.0f} updates/s")
+    print(f"per update: median {lat[count // 2] * 1e3:.2f} ms  "
+          f"p99 {lat[int(count * .99)] * 1e3:.2f} ms  max {lat[-1] * 1e3:.2f} ms")
+    print(f"wrong or missing replies: {bad}" + (f"  sends >5 ms late: {late}" if period else ""))
 
 
 def open_target(args):
@@ -229,6 +261,9 @@ def main():
                 t.sort()
                 print(f"{n} round trips: min {t[0]*1e3:.2f} ms  median {t[n//2]*1e3:.2f} ms  "
                       f"p99 {t[int(n*.99)]*1e3:.2f} ms  max {t[-1]*1e3:.2f} ms")
+            elif a.cmd == "perf":
+                perf(r, int(a.args[0]) if a.args else 1000,
+                     float(a.args[1]) if len(a.args) > 1 else None)
             elif a.cmd == "raw":
                 print(r.command(" ".join(a.args)))
             else:
